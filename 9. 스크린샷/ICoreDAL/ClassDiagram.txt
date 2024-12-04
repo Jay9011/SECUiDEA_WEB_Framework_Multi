@@ -1,0 +1,102 @@
+classDiagram
+    class IDatabaseSetupContainer {
+		<<interface>>
+        +Setups: IReadOnlyDictionary<string, IDatabaseSetup>
+        +GetSetup(sectionName: string): IDatabaseSetup
+        +UpdateSetup(sectionName: string, connectionInfo: IDbConnectionInfo): void
+    }
+
+    class IDatabaseSetup {
+    	<<interface>>
+        +DatabaseType: DatabaseType
+        +DAL: ICoreDAL
+        +GetConnectionString(): string
+        +GetConnectionInfo(): IDbConnectionInfo
+        +UpdateConnectionInfo(connectionInfo: IDbConnectionInfo): void
+    }
+
+    class DatabaseType {
+        <<enumeration>>
+        NONE
+        MSSQL
+        ORACLE
+        END
+    }
+
+    class DatabaseSetup {
+        -_cachedConnectionString: string
+        -_iniFileHelper: IIniFileHelper
+        -_sectionName: string
+        +DatabaseType: DatabaseType
+        +DAL: ICoreDAL
+    }
+
+namespace connectionInfo{
+    class IDbConnectionInfo {
+    	<<interface>>
+        +DatabaseType: DatabaseType
+        +ToConnectionString(): string
+        +Validate(out string): bool
+        +LoadFromSettings(settings: Dictionary): IDbConnectionInfo
+        +ToSettings(): Dictionary
+        +ToReadable(): Dictionary
+    }
+
+    class BaseConnectionInfo {
+        <<abstract>>
+        #EncryptPassword(password: string): string
+        #DecryptPassword(password: string): string
+    }
+
+    class MsSqlConnectionInfo {
+        +Server: string
+        +Database: string
+        +UserId: string
+        -_encryptedPassword: string
+        +Password: string
+        +IntegratedSecurity: bool
+        +Port: int?
+    }
+
+    class OracleConnectionInfo {
+        +Host: string
+        +Port: int
+        +ServiceName: string
+        +UserId: string
+        -_encryptedPassword: string
+        +Password: string
+        +Protocol: string
+    }
+}
+namespace DAL {
+    class ICoreDAL {
+    	<<interface>>
+        +ExecuteProcedureAsync(dbSetup: IDatabaseSetup, storedProcedureName: string, parameters: ISQLParam): Task<SQLResult>
+        +TestConnectionAsync(dbSetup: IDatabaseSetup): Task<SQLResult>
+        +TestConnectionAsync(connectionString: string): Task<SQLResult>
+    }
+
+    class SqlServerDAL {
+        -_instance: Lazy
+        -_timeout: int
+        -AddParameters(SqlCommand, ISQLParam): void
+    }
+
+    class OracleDAL {
+        -_instance: Lazy
+        -_timeout: int
+        -AddParameters(OracleCommand, ISQLParam): void
+    }
+}
+
+    IDatabaseSetupContainer o.. "*" IDatabaseSetup: contains
+    IDatabaseSetup <|.. DatabaseSetup: implements
+    DatabaseSetup --> IDbConnectionInfo: manages
+    DatabaseSetup --> ICoreDAL: uses
+
+    ICoreDAL <|.. SqlServerDAL: implements
+    ICoreDAL <|.. OracleDAL: implements
+    
+    IDbConnectionInfo <|.. BaseConnectionInfo: implements
+    BaseConnectionInfo <|-- MsSqlConnectionInfo: extends
+    BaseConnectionInfo <|-- OracleConnectionInfo: extends
