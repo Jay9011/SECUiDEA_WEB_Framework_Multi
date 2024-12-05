@@ -31,6 +31,26 @@ classDiagram
         +DAL: ICoreDAL
     }
 
+    class SQLResult {
+        +DataSet DataSet
+        +int ResultCode
+        +string Message
+        +bool IsSuccess
+        +static Success(DataSet, string)
+        +static Failue(string)
+        +static AddStandardOutputParameters(IDbCommand)
+    }
+
+namespace Factory{
+    class DbDalFactory {
+        +static ICoreDAL CreateCoreDal(DatabaseType)
+        -static ICoreDAL CreateNewInstance(DatabaseType)\
+    }
+
+    class DbConnectionFactory {
+        +static IDbConnectionInfo CreateConnectionInfo(DatabaseType, Dictionary)
+    }
+}
 namespace connectionInfo{
     class IDbConnectionInfo {
     	<<interface>>
