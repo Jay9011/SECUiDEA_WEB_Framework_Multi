@@ -7,9 +7,6 @@
 [submodule "SECUiDEA_WEB_Visitor/BLL/CryptoManager"]
 	path = SECUiDEA_WEB_Visitor/BLL/CryptoManager
 	url = https://github.com/Jay9011/BLL-CryptoManager.git
-[submodule "SECUiDEA_WEB_Visitor/BLL/ExceptionManager"]
-	path = SECUiDEA_WEB_Visitor/BLL/ExceptionManager
-	url = https://github.com/Jay9011/BLL-ExceptionManager.git
 [submodule "SECUiDEA_WEB_Visitor/BLL/IOManager"]
 	path = SECUiDEA_WEB_Visitor/BLL/IOManager
 	url = https://github.com/Jay9011/BLL-IOManager.git
@@ -31,9 +28,6 @@
 [submodule "SECUiDEA_WEB_Visitor/DAL/OrgDAL"]
 	path = SECUiDEA_WEB_Visitor/DAL/OrgDAL
 	url = https://github.com/Jay9011/DAL-OrgDAL.git
-[submodule "SECUiDEA_WEB_Visitor/DAL/TranslationDAL"]
-	path = SECUiDEA_WEB_Visitor/DAL/TranslationDAL
-	url = https://github.com/Jay9011/DAL-TranslationDAL.git
 [submodule "SECUiDEA_WEB_Visitor/DAL/UserDAL"]
 	path = SECUiDEA_WEB_Visitor/DAL/UserDAL
 	url = https://github.com/Jay9011/DAL-UserDAL.git
@@ -43,3 +37,6 @@
 [submodule "SECUiDEA_WEB_Visitor/WebFront"]
 	path = SECUiDEA_WEB_Visitor/WebFront
 	url = https://github.com/Jay9011/WEB-SECUiDEA_WEB.git
+[submodule "SECUiDEA_WEB_Visitor/AdditionalModule/SingletonManager"]
+	path = SECUiDEA_WEB_Visitor/AdditionalModule/SingletonManager
+	url = https://github.com/Jay9011/Module-SingletonManager.git
