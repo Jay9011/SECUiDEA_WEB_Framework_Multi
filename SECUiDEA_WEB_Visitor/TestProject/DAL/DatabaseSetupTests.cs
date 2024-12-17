@@ -1,4 +1,5 @@
 ﻿using CoreDAL.Configuration;
+using FileIOHelper.Helpers;
 using TestProject.Model;
 
 namespace TestProject.DAL;
@@ -10,7 +11,7 @@ public class DatabaseSetupTests : IDisposable
     
     public DatabaseSetupTests()
     {
-        _testSetup = new DatabaseTestSetup();
+        _testSetup = new DatabaseTestSetup(new IniFileHelper(TestHelper.CreateTempFile()));
         _container = new DatabaseSetupContainer(_testSetup.SetupFiles);
     }
 

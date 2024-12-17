@@ -1,11 +1,16 @@
 ﻿#define REFERENCE_EXISTS
 
-using CryptoManagerNamespace;
+using CryptoManager;
+using CryptoManager.Services;
 
 namespace TestProject.BLL;
 
 public class CryptoManagerTest
 {
+    public CryptoManagerTest()
+    {
+    }
+    
 #if REFERENCE_EXISTS
     [Fact]
     public void EncAesS1Test()
@@ -14,11 +19,12 @@ public class CryptoManagerTest
         var strTxt = "test";
         
         // Act
-        var encAesS1 = CryptoManager.S1.EncAesS1(strTxt);
+        ICryptoManager cryptoManager = new S1AES("tLscn/FdlqXhd4Wp");
+        var encAesS1 = cryptoManager.Encrypt(strTxt);
         
         // Assert
         Assert.NotNull(encAesS1);
-        Assert.Equal(strTxt, CryptoManager.S1.DecAesS1(encAesS1));
+        Assert.Equal(strTxt, cryptoManager.Decrypt(encAesS1));
     }
 #endif
 }

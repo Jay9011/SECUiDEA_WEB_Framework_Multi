@@ -1,5 +1,5 @@
-﻿using FileIOHelper.Helpers;
-using FileIOHelper.Interface;
+﻿using FileIOHelper;
+using FileIOHelper.Helpers;
 using TestProject.Model;
 
 namespace TestProject.Helper;
@@ -7,7 +7,7 @@ namespace TestProject.Helper;
 public class IniFileHelperTests : IDisposable
 {
     private readonly string _tempFilePath;
-    private readonly IIniFileHelper _iniFileHelper;
+    private readonly IIOHelper _iniFileHelper;
     
     public IniFileHelperTests()
     {

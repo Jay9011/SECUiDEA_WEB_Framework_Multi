@@ -35,7 +35,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\BLL\CryptoManager\CryptoManager.csproj" />
-      <ProjectReference Include="..\BLL\ExceptionManager\ExceptionManager.csproj" />
       <ProjectReference Include="..\DAL\CoreDAL\CoreDAL.csproj" />
       <ProjectReference Include="..\WebFront\WebFront.csproj" />
     </ItemGroup>
