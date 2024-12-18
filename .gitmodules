@@ -1,42 +1,42 @@
-[submodule "SECUiDEA_WEB_Visitor/AdditionalModule/FileIOHelper"]
-	path = SECUiDEA_WEB_Visitor/AdditionalModule/FileIOHelper
+[submodule "SECUiDEA_WEB_Visitor/SubModules/FileIOHelper"]
+	path = SECUiDEA_WEB_Visitor/SubModules/FileIOHelper
 	url = https://github.com/Jay9011/Helper-FileIOHelper.git
-[submodule "SECUiDEA_WEB_Visitor/BLL/AuthService"]
-	path = SECUiDEA_WEB_Visitor/BLL/AuthService
-	url = https://github.com/Jay9011/BLL-AuthService.git
-[submodule "SECUiDEA_WEB_Visitor/BLL/CryptoManager"]
-	path = SECUiDEA_WEB_Visitor/BLL/CryptoManager
-	url = https://github.com/Jay9011/BLL-CryptoManager.git
-[submodule "SECUiDEA_WEB_Visitor/BLL/IOManager"]
-	path = SECUiDEA_WEB_Visitor/BLL/IOManager
-	url = https://github.com/Jay9011/BLL-IOManager.git
-[submodule "SECUiDEA_WEB_Visitor/BLL/OrgBLL"]
-	path = SECUiDEA_WEB_Visitor/BLL/OrgBLL
-	url = https://github.com/Jay9011/BLL-OrgBLL.git
-[submodule "SECUiDEA_WEB_Visitor/BLL/VisitBLL"]
-	path = SECUiDEA_WEB_Visitor/BLL/VisitBLL
-	url = https://github.com/Jay9011/BLL-VisitBLL.git
-[submodule "SECUiDEA_WEB_Visitor/DAL/AgreementDAL"]
-	path = SECUiDEA_WEB_Visitor/DAL/AgreementDAL
-	url = https://github.com/Jay9011/DAL-AgreementDAL.git
-[submodule "SECUiDEA_WEB_Visitor/DAL/CarriedItemDAL"]
-	path = SECUiDEA_WEB_Visitor/DAL/CarriedItemDAL
-	url = https://github.com/Jay9011/DAL-CarriedItemDAL.git
-[submodule "SECUiDEA_WEB_Visitor/DAL/CoreDAL"]
-	path = SECUiDEA_WEB_Visitor/DAL/CoreDAL
-	url = https://github.com/Jay9011/DAL-CoreDAL.git
-[submodule "SECUiDEA_WEB_Visitor/DAL/OrgDAL"]
-	path = SECUiDEA_WEB_Visitor/DAL/OrgDAL
-	url = https://github.com/Jay9011/DAL-OrgDAL.git
-[submodule "SECUiDEA_WEB_Visitor/DAL/UserDAL"]
-	path = SECUiDEA_WEB_Visitor/DAL/UserDAL
-	url = https://github.com/Jay9011/DAL-UserDAL.git
-[submodule "SECUiDEA_WEB_Visitor/DAL/VisitReserveDAL"]
-	path = SECUiDEA_WEB_Visitor/DAL/VisitReserveDAL
-	url = https://github.com/Jay9011/DAL-VisitReserveDAL.git
-[submodule "SECUiDEA_WEB_Visitor/WebFront"]
-	path = SECUiDEA_WEB_Visitor/WebFront
-	url = https://github.com/Jay9011/WEB-SECUiDEA_WEB.git
-[submodule "SECUiDEA_WEB_Visitor/AdditionalModule/SingletonManager"]
-	path = SECUiDEA_WEB_Visitor/AdditionalModule/SingletonManager
+[submodule "SECUiDEA_WEB_Visitor/SubModules/SingletonManager"]
+	path = SECUiDEA_WEB_Visitor/SubModules/SingletonManager
 	url = https://github.com/Jay9011/Module-SingletonManager.git
+[submodule "SECUiDEA_WEB_Visitor/SubModules/AuthService"]
+	path = SECUiDEA_WEB_Visitor/SubModules/AuthService
+	url = https://github.com/Jay9011/BLL-AuthService.git
+[submodule "SECUiDEA_WEB_Visitor/SubModules/CryptoManager"]
+	path = SECUiDEA_WEB_Visitor/SubModules/CryptoManager
+	url = https://github.com/Jay9011/BLL-CryptoManager.git
+[submodule "SECUiDEA_WEB_Visitor/SubModules/IOManager"]
+	path = SECUiDEA_WEB_Visitor/SubModules/IOManager
+	url = https://github.com/Jay9011/BLL-IOManager.git
+[submodule "SECUiDEA_WEB_Visitor/SubModules/OrgBLL"]
+	path = SECUiDEA_WEB_Visitor/SubModules/OrgBLL
+	url = https://github.com/Jay9011/BLL-OrgBLL.git
+[submodule "SECUiDEA_WEB_Visitor/SubModules/VisitBLL"]
+	path = SECUiDEA_WEB_Visitor/SubModules/VisitBLL
+	url = https://github.com/Jay9011/BLL-VisitBLL.git
+[submodule "SECUiDEA_WEB_Visitor/SubModules/AgreementDAL"]
+	path = SECUiDEA_WEB_Visitor/SubModules/AgreementDAL
+	url = https://github.com/Jay9011/DAL-AgreementDAL.git
+[submodule "SECUiDEA_WEB_Visitor/SubModules/CarriedItemDAL"]
+	path = SECUiDEA_WEB_Visitor/SubModules/CarriedItemDAL
+	url = https://github.com/Jay9011/DAL-CarriedItemDAL.git
+[submodule "SECUiDEA_WEB_Visitor/SubModules/CoreDAL"]
+	path = SECUiDEA_WEB_Visitor/SubModules/CoreDAL
+	url = https://github.com/Jay9011/DAL-CoreDAL.git
+[submodule "SECUiDEA_WEB_Visitor/SubModules/OrgDAL"]
+	path = SECUiDEA_WEB_Visitor/SubModules/OrgDAL
+	url = https://github.com/Jay9011/DAL-OrgDAL.git
+[submodule "SECUiDEA_WEB_Visitor/SubModules/UserDAL"]
+	path = SECUiDEA_WEB_Visitor/SubModules/UserDAL
+	url = https://github.com/Jay9011/DAL-UserDAL.git
+[submodule "SECUiDEA_WEB_Visitor/SubModules/VisitReserveDAL"]
+	path = SECUiDEA_WEB_Visitor/SubModules/VisitReserveDAL
+	url = https://github.com/Jay9011/DAL-VisitReserveDAL.git
+[submodule "SECUiDEA_WEB_Visitor/SubModules/WEB_FRONT_VISITOR"]
+	path = SECUiDEA_WEB_Visitor/SubModules/WEB_FRONT_VISITOR
+	url = https://github.com/Jay9011/WEB-SECUiDEA_WEB.git

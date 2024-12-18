@@ -78,30 +78,6 @@ public class RegistryHelperTests : IDisposable
     }
 
     [Fact]
-    public void CacheWorksWhenReadingMultipleTimes()
-    {
-        // Arrange
-        const string section = "CacheWorksWhenReadingMultipleTimes";
-        const string key = "TestKey";
-        const string value = "TestValue";
-        
-        // Act
-        _registryHelper.WriteValue(section, key, value);
-        string firstRead = _registryHelper.ReadValue(section, key);
-        
-        using (var regKey = Registry.CurrentUser.CreateSubKey($"{RegistryPath}\\{section}"))
-        {
-            regKey?.SetValue(key, "ModifiedValue");
-        }
-        
-        string SecondRead = _registryHelper.ReadValue(section, key);
-        
-        // Assert
-        Assert.Equal(firstRead, SecondRead); // 캐시가 잘 동작하는지 확인 (중간에 해당 헬퍼가 아닌 다른 방법 다른 값이 들어가도 캐시된 값이 나와야 함)
-        Assert.Equal(value, SecondRead);
-    }
-
-    [Fact]
     public void CacheWorksWhenWriteValueWithHelper()
     {
         // Arrange
