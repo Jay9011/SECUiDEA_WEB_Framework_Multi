@@ -31,16 +31,16 @@ public class OracleDALTests
         [DbParameter("p_department")]
         public string Department { get; set; }
 
-        [DbParameter("p_result1", DbType.Object, ParameterDirection.Output)]
+        [DbParameter("p_result1")]
         public object result1 { get; set; }
         
-        [DbParameter("p_result2", DbType.Object, ParameterDirection.Output)]
+        [DbParameter("p_result2")]
         public object result2 { get; set; }
         
-        [DbParameter("p_result3", DbType.Object, ParameterDirection.Output)]
+        [DbParameter("p_result3")]
         public object result3 { get; set; }
 
-        [DbParameter("p_test", DbType.Int32, ParameterDirection.Output)]
+        [DbParameter("p_test")]
         public int test { get; set; }
     }
 
@@ -55,7 +55,7 @@ public class OracleDALTests
         [DbParameter] // 프로퍼티명 - 파라미터명 테스트
         public string PSALARY { get; set; }
         
-        [DbParameter("p_emp_id", DbType.Int32, ParameterDirection.Output)] 
+        [DbParameter("p_emp_id")] 
         public int EmployeeId { get; set; }
     }
     
@@ -64,7 +64,7 @@ public class OracleDALTests
         [DbParameter("p_department")]
         public string DEPARTMENT { get; set; }
         
-        [DbParameter(dbType: DbType.Int32, direction: ParameterDirection.Output)] // 프로퍼티명 - 파라미터명 테스트
+        [DbParameter] // 프로퍼티명 - 파라미터명 테스트
         public int DeletedCount { get; set; }
     }
 

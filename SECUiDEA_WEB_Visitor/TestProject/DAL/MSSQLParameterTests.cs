@@ -39,7 +39,7 @@ namespace TestProject.DAL
             [DbParameter]
             public int Required2 { get; set; }
 
-            [DbParameter(dbType: DbType.Int32, direction: ParameterDirection.Output)]
+            [DbParameter]
             public int OutputValue { get; set; }
             
             // Optional 파라미터는 생략
@@ -54,7 +54,7 @@ namespace TestProject.DAL
             [DbParameter]
             public int Param2 { get; set; }
 
-            [DbParameter(dbType: DbType.Int32, direction: ParameterDirection.Output)]
+            [DbParameter]
             public int OutputValue { get; set; }
 
             [DbParameter]

@@ -31,7 +31,7 @@ public class MSSQLDALTests
         [DbParameter]
         public string Department { get; set; }
 
-        [DbParameter(dbType:DbType.Int32, direction:ParameterDirection.Output)]
+        [DbParameter]
         public int test { get; set; }
     }
 
@@ -46,7 +46,7 @@ public class MSSQLDALTests
         [DbParameter] 
         public decimal PSALARY { get; set; }
         
-        [DbParameter("p_emp_id", direction:ParameterDirection.Output)] 
+        [DbParameter("p_emp_id")] 
         public int EmployeeId { get; set; }
     }
     
@@ -55,7 +55,7 @@ public class MSSQLDALTests
         [DbParameter("p_department")]
         public string DEPARTMENT { get; set; }
         
-        [DbParameter(direction:ParameterDirection.Output)]
+        [DbParameter()]
         public int DeletedCount { get; set; }
     }
 

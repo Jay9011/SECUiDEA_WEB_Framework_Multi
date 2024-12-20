@@ -31,7 +31,7 @@ public class MSSQLCURDTest
         [DbParameter] 
         public string Department { get; set; }
 
-        [DbParameter(DbType = DbType.Int32, Direction = ParameterDirection.Output)]
+        [DbParameter]
         public int test { get; set; }
     }
 
@@ -46,7 +46,7 @@ public class MSSQLCURDTest
         [DbParameter] 
         public decimal PSALARY { get; set; }
 
-        [DbParameter("p_emp_id", Direction = ParameterDirection.Output)]
+        [DbParameter("p_emp_id")]
         public int EmployeeId { get; set; }
     }
 
@@ -67,7 +67,7 @@ public class MSSQLCURDTest
         [DbParameter("p_department")] 
         public string Department { get; set; }
 
-        [DbParameter(Direction = ParameterDirection.Output)]
+        [DbParameter()]
         public int DeletedCount { get; set; }
     }
     

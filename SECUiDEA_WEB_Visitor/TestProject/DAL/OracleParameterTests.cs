@@ -42,7 +42,7 @@ namespace TestProject.DAL
             [DbParameter("p_Optional")] // p_Optional 파라미터는 생략
             public int Optional { get; set; }
 
-            [DbParameter("p_ResultCursor", DbType.Object, ParameterDirection.Output)]
+            [DbParameter("p_ResultCursor")]
             public object ResultCursor { get; set; }
         }
 
@@ -55,7 +55,7 @@ namespace TestProject.DAL
             [DbParameter("p_Param2")]
             public int Param2 { get; set; }
 
-            [DbParameter("p_ResultCursor", DbType.Object, ParameterDirection.Output)]
+            [DbParameter("p_ResultCursor")]
             public object ResultCursor { get; set; }
 
             [DbParameter("p_ExtraParam")]
