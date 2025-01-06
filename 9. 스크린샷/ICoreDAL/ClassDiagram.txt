@@ -1,7 +1,7 @@
 classDiagram
     class IDatabaseSetupContainer {
 		<<interface>>
-        +Setups: IReadOnlyDictionary<string, IDatabaseSetup>
+        +Setups: IReadOnlyDictionary＜string, IDatabaseSetup＞
         +GetSetup(sectionName: string): IDatabaseSetup
         +UpdateSetup(sectionName: string, connectionInfo: IDbConnectionInfo): void
     }
@@ -15,6 +15,16 @@ classDiagram
         +UpdateConnectionInfo(connectionInfo: IDbConnectionInfo): void
     }
 
+    class DatabaseSetup {
+        -_iniFileHelper: IIniFileHelper
+        -_cryptoManager: ICryptoManager
+        -_sectionName: string
+        +DatabaseType: DatabaseType
+        +DAL: ICoreDAL
+        -Decrypt(settings: Dictionary＜string, string＞): void
+        -Encrypt(settings: Dictionary＜string, string＞): void
+    }
+
     class DatabaseType {
         <<enumeration>>
         NONE
@@ -23,59 +33,70 @@ classDiagram
         END
     }
 
-    class DatabaseSetup {
-        -_cachedConnectionString: string
-        -_iniFileHelper: IIniFileHelper
-        -_sectionName: string
-        +DatabaseType: DatabaseType
-        +DAL: ICoreDAL
+    class DatabaseParameterProcessor {
+        -_parameterHandler: IDbParameterHandler
+        -_dbType: DatabaseType
+        +AddParameters(IDbConnection, IDbCommand, ISQLParam): void
+        +AddParameters(IDbConnection, IDbCommand, Dictionary＜string, object＞): void
+        +AddReturnParam(IDbConnection, IDbCommand): void
+        +SetValueOutputParameters(IDbConnection, IDbCommand): void
+        +SetValueOutputParameters(IDbConnection, Dictionary＜string, object＞): void
+        +SetReturnValue(IDbCommand): int
+        -CreateParameterHandler(DatabaseType): IDbParameterHandler
     }
 
     class SQLResult {
-        +DataSet DataSet
-        +int ResultCode
-        +string Message
-        +bool IsSuccess
+        +IsSuccess: bool
+        +Message: string
+        +DataSet: DataSet
+        +ReturnValue: int
         +static Success(DataSet, string)
-        +static Failue(string)
-        +static AddStandardOutputParameters(IDbCommand)
+        +static Fail(string)
     }
 
 namespace Factory{
     class DbDalFactory {
-        +static ICoreDAL CreateCoreDal(DatabaseType)
-        -static ICoreDAL CreateNewInstance(DatabaseType)\
+        +static CreateCoreDal(DatabaseType): ICoreDAL
+        -static CreateNewInstance(DatabaseType): ICoreDAL
     }
 
     class DbConnectionFactory {
-        +static IDbConnectionInfo CreateConnectionInfo(DatabaseType, Dictionary)
+        +static CreateConnectionInfo(DatabaseType, Dictionary): IDbConnectionInfo
     }
 }
+
+namespace Extensions{
+    class DbParameterAttribute {
+        <<Attribute>>
+        +Name: string
+        +DbType: DbType
+        +Direction: ParameterDirection
+    }
+
+    class SystemDataExtensions {
+        <<Extension Method>>
+        +static ToObject＜T＞(table: this DataTable)
+        +static ToObject＜T＞(row: this DataRow)
+    }
+}
+
 namespace connectionInfo{
     class IDbConnectionInfo {
     	<<interface>>
         +DatabaseType: DatabaseType
         +ToConnectionString(): string
         +Validate(out string): bool
-        +LoadFromSettings(settings: Dictionary): IDbConnectionInfo
+        +LoadFromSettings(settings: Dictionary＜string, string＞): IDbConnectionInfo
         +ToSettings(): Dictionary
-        +ToReadable(): Dictionary
-    }
-
-    class BaseConnectionInfo {
-        <<abstract>>
-        #EncryptPassword(password: string): string
-        #DecryptPassword(password: string): string
     }
 
     class MsSqlConnectionInfo {
         +Server: string
         +Database: string
         +UserId: string
-        -_encryptedPassword: string
         +Password: string
         +IntegratedSecurity: bool
-        +Port: int?
+        +Port: int
     }
 
     class OracleConnectionInfo {
@@ -83,29 +104,57 @@ namespace connectionInfo{
         +Port: int
         +ServiceName: string
         +UserId: string
-        -_encryptedPassword: string
         +Password: string
         +Protocol: string
     }
 }
+
 namespace DAL {
     class ICoreDAL {
     	<<interface>>
-        +ExecuteProcedureAsync(dbSetup: IDatabaseSetup, storedProcedureName: string, parameters: ISQLParam): Task<SQLResult>
         +TestConnectionAsync(dbSetup: IDatabaseSetup): Task<SQLResult>
         +TestConnectionAsync(connectionString: string): Task<SQLResult>
+        +ExecuteProcedure(IDatabaseSetup, string, ISQLParam): SQLResult
+        +ExecuteProcedure(IDatabaseSetup, string, Dictionary<string, object>): SQLResult
+        +ExecuteProcedureAsync(IDatabaseSetup, string, ISQLParam): Task＜SQLResult＞
+        +ExecuteProcedureAsync(IDatabaseSetup, string, Dictionary<string, object>): Task＜SQLResult＞
     }
 
     class SqlServerDAL {
         -_instance: Lazy
         -_timeout: int
-        -AddParameters(SqlCommand, ISQLParam): void
+        -_parameterProcessor: DatabaseParameterProcessor
+        -ExecuteProcedureInternal(IDatabaseSetup, string, Action<IDbConnection, IDbCommand>, Action<IDbCommand>): SQLResult
+        -ExecuteProcedureInternalAsync(IDatabaseSetup, string, Action<IDbConnection, IDbCommand>, Action<IDbCommand>): Task＜SQLResult＞
     }
 
     class OracleDAL {
         -_instance: Lazy
         -_timeout: int
-        -AddParameters(OracleCommand, ISQLParam): void
+        -_parameterProcessor: DatabaseParameterProcessor
+        -ExecuteProcedureInternal(IDatabaseSetup, string, Action<IDbConnection, IDbCommand>, Action<IDbCommand>): SQLResult
+        -ExecuteProcedureInternalAsync(IDatabaseSetup, string, Action<IDbConnection, IDbCommand>, Action<IDbCommand>): Task＜SQLResult＞
+    }
+}
+
+namespace Handler {
+    class IDbParameterHandler {
+        <<interface>>
+        +NormalizeParameterName(paramName: string): string
+        +AddParameterPrefix(paramName: string): string
+        +CreateParameter(parameter: IDbDataParameter, value: object): IDbDataParameter
+        +CreateReturnParameter(): IDbDataParameter
+        +GetProcedureParameterCollection(IDbConnection, IDbCommand): DbParameterCollection
+        +SetOutputParameter(IDbCommand, ISQLParam): void
+        +SetOutputParameter(IDbCommand, Dictionary＜string, object＞): void
+    }
+
+    class SqlServerParameterHandler {
+
+    }
+
+    class OracleParameterHandler {
+
     }
 }
 
@@ -116,7 +165,13 @@ namespace DAL {
 
     ICoreDAL <|.. SqlServerDAL: implements
     ICoreDAL <|.. OracleDAL: implements
+
+    SqlServerDAL --> DatabaseParameterProcessor: has
+    OracleDAL --> DatabaseParameterProcessor: has
+
+    DatabaseParameterProcessor --> IDbParameterHandler: uses
+    IDbParameterHandler <|.. SqlServerParameterHandler: implements
+    IDbParameterHandler <|.. OracleParameterHandler: implements
     
-    IDbConnectionInfo <|.. BaseConnectionInfo: implements
-    BaseConnectionInfo <|-- MsSqlConnectionInfo: extends
-    BaseConnectionInfo <|-- OracleConnectionInfo: extends
+    IDbConnectionInfo <|-- MsSqlConnectionInfo: extends
+    IDbConnectionInfo <|-- OracleConnectionInfo: extends
