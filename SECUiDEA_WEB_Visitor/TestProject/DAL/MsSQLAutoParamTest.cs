@@ -35,7 +35,8 @@ public class MsSQLAutoParamTest
         {
             ["Name"] = "Tester",
             ["NewId"] = 0,
-            ["ResultMessage"] = string.Empty
+            ["ResultMessage"] = string.Empty,
+            ["NonDbParam"] = "Non-DB Param"
         };
         
         // Act

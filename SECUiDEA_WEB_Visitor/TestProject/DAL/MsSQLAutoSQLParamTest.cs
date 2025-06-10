@@ -35,6 +35,8 @@ public class MsSQLAutoSQLParamTest
         
         [DbParameter]
         public int NewId { get; set; }
+        [DbParameter]
+        public string NonDbParam { get; set; }
         
         [DbParameter]
         public string ResultMessage { get; set; }
@@ -48,7 +50,8 @@ public class MsSQLAutoSQLParamTest
         {
             Name = "Tester",
             NewId = 0,
-            ResultMessage = string.Empty
+            ResultMessage = string.Empty,
+            NonDbParam = "Non-DB Param"
         };
         
         // Act
