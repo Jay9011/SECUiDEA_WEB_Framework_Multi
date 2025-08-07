@@ -132,8 +132,7 @@ Global
 		{4813A646-E57A-44F7-80E7-AC6F52B3CAA2} = {216EF8F5-4F7A-440F-AE7B-9B6A2D0D1ACC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		RESX_CultureCountyOverrides = ko=ko-KR
 		SolutionGuid = {956AA7ED-330F-4743-94F8-6AA31246CF1B}
-		RESX_NeutralResourcesLanguage = ko-KR
+		RESX_CultureCountyOverrides = ko=ko-KR
 	EndGlobalSection
 EndGlobal
